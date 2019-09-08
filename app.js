@@ -6,18 +6,23 @@ const express = require('express'); // include express in our app
 const app = express();
 const port = 8080;
 
-app.get('/', (req,res)=>{
 
-    // res.status(200).send('Welcome to Node.js Express!');
-    res.status(200).json({message:'Welcome to node.js express!', app:'new app'});
+app.get('/', (req, res) => {
+    console.log("Got a GET request for the homepage");
+    res.send('Hello GET');
 });
 
-app.post('/', (req,res)=>{
-
-    res.send('yes it is a post request!');
+app.post('/', (req, res) => {
+    console.log("Got a POST request for the homepage");
+    res.send('Hello POST');
 });
 
-app.listen(port, ()=>{
+app.delete('/del_user', (req, res) => {
+    console.log("Got a DELETE request for /del_user");
+    res.send('Hello DELETE');
+})
+
+app.listen(port, () => {
     console.log(`App running on ${port}...`);
 });
 
