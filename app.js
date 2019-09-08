@@ -1,11 +1,27 @@
 const fs = require('fs');  // include file module to read and write 
+const http = require('http'); // include http module
+const url = require('url'); // include url module to get url related information
 
-//non-blocking asynchronous way
-fs.readFile('./testFile.txt', 'utf-8', (err, data) => {
-    console.log(data);
-    fs.writeFile('./testFile2.txt',data,'utf-8',err =>{
-        console.log('file has been written');
-    });
+const Server = http.createServer((req, res) => {
+    //console.log(req.url); // get url information
+    const pathName = req.url;
+    // console.log(pathName);
+    if (pathName == '/' || pathName == '/Overview')
+    {
+        res.end('welcome to Product Overview');
+    } 
+    else if (pathName == '/product') 
+    {
+        res.end('This is the product');
+    }
+    else 
+    {
+        res.writeHead(404);
+        res.end('Page Not Found!');
+    }
 });
 
-console.log('read data!');
+Server.listen(8080, () => {
+    console.log('listining from 8080');
+});
+
