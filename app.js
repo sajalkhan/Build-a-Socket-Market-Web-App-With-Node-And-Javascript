@@ -6,6 +6,7 @@ const express = require('express'); // include express in our app
 const app = express();
 const port = 8080;
 
+app.use(express.static('public')); // now we can use static file
 
 app.get('/', (req, res) => {
     console.log("Got a GET request for the homepage");
