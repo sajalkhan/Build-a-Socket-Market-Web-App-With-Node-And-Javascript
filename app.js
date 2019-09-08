@@ -8,18 +8,25 @@ const data =  fs.readFileSync(`${__dirname}/dev-data/data.json`,'utf-8'); // rea
 const productData = JSON.parse(data); // parse json data
 
 const Server = http.createServer((req, res) => {
+    
     //console.log(req.url); // get url information
-    const pathName = req.url;
-    // console.log(pathName);
-    if (pathName === '/' || pathName === '/Overview')
+    //console.log(url.parse(req.url,true));
+    
+    const { query, pathname} = url.parse(req.url,true); // assign path and pathname
+    //const pathname = req.url;
+    //console.log(query);
+    //console.log(pathname);
+
+    if (pathname === '/' || pathname === '/Overview')
     {
         res.end('welcome to Product Overview');
     } 
-    else if (pathName === '/product') 
+    else if (pathname === '/product') 
     {
+        console.log(query);
         res.end('This is the product');
     }
-    else if(pathName === '/api'){
+    else if(pathname === '/api'){
         
         // fs.readFile('./dev-data/data.json','utf-8',(err,data)=>{});                     
         // fs.readFile(`${__dirname}/dev-data/data.json`,'utf-8',(err,data)=>{               ----- This read file will read every time when
