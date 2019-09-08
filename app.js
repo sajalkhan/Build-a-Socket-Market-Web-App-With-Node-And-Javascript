@@ -8,20 +8,21 @@ const port = 8080;
 
 app.use(express.static('public')); // now we can use static file
 
-app.get('/', (req, res) => {
-    console.log("Got a GET request for the homepage");
-    res.send('Hello GET');
+app.get('/index.html',(req,res)=>{
+
+    res.sendfile(__dirname+"/index.html");
 });
 
-app.post('/', (req, res) => {
-    console.log("Got a POST request for the homepage");
-    res.send('Hello POST');
-});
+app.get('/process_get', (req, res) => {
+    
+    response = {
+        first_name : req.query.first_name,
+        last_name : req.query.last_name
+    };
 
-app.delete('/del_user', (req, res) => {
-    console.log("Got a DELETE request for /del_user");
-    res.send('Hello DELETE');
-})
+    console.log(response);
+    res.end(JSON.stringify(response));
+});
 
 app.listen(port, () => {
     console.log(`App running on ${port}...`);
