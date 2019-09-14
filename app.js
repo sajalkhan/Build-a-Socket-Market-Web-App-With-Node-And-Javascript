@@ -22,6 +22,13 @@ app.get('/',(req,res)=>{
     });
 });
 
+app.get('/about',(req,res)=>{
+
+    res.render('about',{
+        status:"yes about page is working perfectly :)"
+    });
+});
+
 app.use(express.static(path.join(__dirname,'public'))); // now we can use static file
 app.listen(port, () => { console.log(`App running on ${port}...`); });
 
