@@ -13,6 +13,7 @@ const port =  process.env.PORT || 8080;
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
+//API key: pk_a4db854aeb4c4f18bd467fd70841b876
 
 //set handle bars routs
 app.get('/',(req,res)=>{
