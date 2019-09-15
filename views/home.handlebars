@@ -1,6 +1,22 @@
-<h1>{{stock.companyName}} ({{stock.symbol}})</h1>
-<br/><br/>
-<!-- Loop through all api object data -->
+<div class="jumbotron">
+    <h1 class="display-4">{{stock.companyName}} ({{stock.symbol}})</h1>
+    <p class="lead">
+    <strong>Latest Price:</strong> {{stock.latestPrice }} <br />
+    <strong>Extended Price:</strong> {{stock.extendedPrice  }} <br />
+    <strong>Latest Time:</strong> {{stock.latestTime  }} <br />
+    <strong>Market cap:</strong> {{stock.marketCap  }} <br />
+    <strong>PeRation:</strong> {{stock.peRatio  }} <br />
+    <strong>week 52 High:</strong> {{stock.week52High  }} <br />
+    <strong>Extended Change Percent:</strong> {{stock.extendedChangePercent  }} <br />
+    <strong>Ytd Change:</strong> {{stock.ytdChange  }} <br />
+    <strong>Change Percent:</strong> {{stock.changePercent  }}
+    </p>
+</div>
+
+<!-- Loop through all api object data 
+
 {{#each stock}}
     {{@key}} | {{this}} <br/>
 {{/each}}
+
+-->
