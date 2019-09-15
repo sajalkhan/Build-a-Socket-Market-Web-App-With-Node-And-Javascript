@@ -20,8 +20,8 @@ app.use(bodyparser.urlencoded({ extended: false }));
 
 //API key: pk_a4db854aeb4c4f18bd467fd70841b876
 
-function call_api(finishApi) {
-    request('https://cloud.iexapis.com/stable/stock/fb/quote?token=pk_a4db854aeb4c4f18bd467fd70841b876', { json: true }, (err, res, body) => {
+function call_api(finishApi,CompanyInfo) {
+    request('https://cloud.iexapis.com/stable/stock/'+CompanyInfo+'/quote?token=pk_a4db854aeb4c4f18bd467fd70841b876', { json: true }, (err, res, body) => {
 
         if (err) return console.log(err);
 
@@ -40,19 +40,20 @@ app.get('/', (req, res) => {
             stock: doneApi
         });
         // console.log(doneApi);
-    });
+    },'fb');
 });
+
+// search fb/goog/aapl/tsla
 
 //set handle bars get routs
 app.post('/', (req, res) => {
 
-    parseData = req.body.search_value;
+    // parseData = req.body.search_value;
     call_api(function (doneApi) {  // it's a callback function
         res.render('home', {
-            stock: doneApi,
-            parseData: parseData
+            stock: doneApi
         });
-    });
+    }, req.body.search_value);
 });
 
 app.get('/about', (req, res) => {
