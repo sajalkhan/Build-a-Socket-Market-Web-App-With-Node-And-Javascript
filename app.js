@@ -6,6 +6,7 @@ const path = require('path'); //include path
 const express = require('express'); // include express in our app
 const exphbs = require('express-handlebars');
 const request = require('request');
+const bodyparser = require('body-parser');
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -14,13 +15,16 @@ const port = process.env.PORT || 8080;
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
+//use bodyparser middleware
+app.use(bodyparser.urlencoded({ extended: false }));
+
 //API key: pk_a4db854aeb4c4f18bd467fd70841b876
 
 function call_api(finishApi) {
     request('https://cloud.iexapis.com/stable/stock/fb/quote?token=pk_a4db854aeb4c4f18bd467fd70841b876', { json: true }, (err, res, body) => {
 
         if (err) return console.log(err);
-         
+
         if (res.statusCode == 200) {
             finishApi(body);
         };
@@ -28,7 +32,7 @@ function call_api(finishApi) {
     });
 }
 
-//set handle bars routs
+//set handle bars get routs
 app.get('/', (req, res) => {
 
     call_api(function (doneApi) {  // it's a callback function
@@ -36,6 +40,18 @@ app.get('/', (req, res) => {
             stock: doneApi
         });
         // console.log(doneApi);
+    });
+});
+
+//set handle bars get routs
+app.post('/', (req, res) => {
+
+    parseData = req.body.search_value;
+    call_api(function (doneApi) {  // it's a callback function
+        res.render('home', {
+            stock: doneApi,
+            parseData: parseData
+        });
     });
 });
 
