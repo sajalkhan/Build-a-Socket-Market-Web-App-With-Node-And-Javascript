@@ -1,2 +1,6 @@
-<h1>This is our home page..</h1>
-<p>{{ status }}</p>
+<h1>{{stock.companyName}} ({{stock.symbol}})</h1>
+<br/><br/>
+<!-- Loop through all api object data -->
+{{#each stock}}
+    {{@key}} | {{this}} <br/>
+{{/each}}
